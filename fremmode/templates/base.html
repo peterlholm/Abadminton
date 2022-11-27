@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="pic/bad120.png" type="image/png" sizes="120x120">
+  <link rel="icon" href="pic/bad192.png" type="image/png" sizes="192x192">
+  <link rel="icon" href="/static/pic/bad512.png" type="image/png" sizes="512x512">
+  <link rel="manifest2" href="/manifest.json">
+  <link rel="apple-touch-icon" href="pic/bad192a.png" type="image/png" sizes="192x192">
+  <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+  <meta name="theme-color" content="#ee0000" />
+  <link rel="icon" type="image/x-icon" href="/static/pic/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <link href="{% static 'site.css' %}" rel="stylesheet">
+  <title>Badminton2</title>
+</head>
+
+<body>
+  <div class="container">
+  {% include 'menu.html' %}
+
+    {% block page %}
+    <!-- page here -->
+    {%endblock %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+    integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+  {% block script %}
+  {% endblock %}
+</body>
+
+</html>

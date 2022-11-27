@@ -1,0 +1,28 @@
+[MASTER]
+load-plugins=pylint_django
+
+django-settings-module=badminton.settings
+
+[MESSAGES CONTROL]
+
+disable=line-too-long,
+        missing-module-docstring
+        # no-member
+        #missing-function-docstring,
+        #missing-module-docstring,
+        #missing-class-docstring,
+        
+
+[BASIC]
+
+good-names=i,
+           j,
+           d
+        #    n,
+        #    p
+        #    k,
+        #    s,
+        #    x,y,v,u,
+        #    X,Y,Z,
+        #    fd,
+        #    ex

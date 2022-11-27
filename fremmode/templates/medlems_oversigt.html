@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page %}
+  <h1>Medlemsoversigt 1</h1>
+  <div class="table-responsive">
+    <table class="table table-light table-striped">
+      <tr>
+        <th>Navn</th><th>Mobil</th><th>E-mail</th><th>Onsdag</th>
+          <th>Lørdag</th>
+          {% if admin %}
+          <th>No</th><th>Status</th><th>Text</th>
+          {% endif %}
+      </tr>
+  
+      {% for m in  medlemmer %}
+        <tr>
+          <td> {{m.Fornavn}} {{m.Efternavn}}</td><td><a href="tel:{{m.Mobil}}">{{m.Mobil}}</a></td><td><a href="mailto:{{m.Email}}">{{m.Email}}</a></td>
+          <td>{% if m.Onsdag %}<i class="bi bi-check"></i> {% endif %}</td><td>{% if m.Lordag %} <i class="bi bi-check"></i> {% endif %}</td>
+          {% if admin %}
+          <td> {{m.Medlemsnummer}}</td><th>{{m.Status}}</th><th>{{m.Text}}</th>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{%endblock %}
+
+{% block script %}
+<script>
+  $("#medlem").addClass("active");
+</script>
+{% endblock %}

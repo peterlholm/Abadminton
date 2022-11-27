@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block page %}
+<h1>Oversigt</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-light table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th>Dato</th>
+        {% for d in dates %}
+        <th class="center">{{d| date:"l j/n"}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for l in liste %}
+      <tr>
+        <th>{{ l.0 }}</th>
+        {% for e in l %}
+          {% if forloop.counter != 1%}
+            <td>{{ e }}</td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  {%endblock %}
+
+  {% block script %}
+  <script>
+    $("#oversigt").addClass("active");
+  </script>
+  {% endblock %}
