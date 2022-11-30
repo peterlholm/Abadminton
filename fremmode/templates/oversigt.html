@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block page %}
-<h1>Oversigt</h1>
+<style>
 
+{% comment %} .table-striped>tbody>tr:nth-child(odd)>td{ {% endcomment %}
+.afbud {
+  background-color: red !important;
+  }
+  .kommera {
+    background-color: green !important;
+  }
+</style>
+<h1>Oversigt</h1>
+{{ statuspic}} {{statuspic.1}}
 <div class="table-responsive">
   <table class="table table-bordered table-light table-striped">
     <thead>
@@ -19,7 +30,19 @@
         <th>{{ l.0 }}</th>
         {% for e in l %}
           {% if forloop.counter != 1%}
-            <td>{{ e }}</td>
+            <td>
+              {% if e > 0 %}
+                <img src="{% static 'pic/green_tick.png' %}" alt="kommer" width="20" height="20"/>
+              {% elif e == -1 %}
+                <img src="{% static 'pic/status_1.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
+              {% elif e == -2 %}
+                <img src="{% static 'pic/status_2.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
+              {% elif e == -3 %}
+                <img src="{% static 'pic/status_3.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
+              {% else %}
+              -1
+              {% endif %}
+            </td>
           {% endif %}
         {% endfor %}
       </tr>

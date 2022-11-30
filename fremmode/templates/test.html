@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block page %}
+<style>
+
+{% comment %} .table-striped>tbody>tr:nth-child(odd)>td{ {% endcomment %}
+.afbud {
+  background-color: red !important;
+  }
+  .kommera {
+    background-color: green !important;
+  }
+</style>
+<h1>Oversigt</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-light table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th>Dato</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>a</th>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td style="background-color: green;">tilbud</td>
+        <td style="background-color: green;">tilbud</td>
+      </tr>
+      <tr>
+        <th>a</th>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td style="background-color: green;">tilbud</td>
+        <td style="background-color: green;">tilbud</td>
+      </tr>
+      <tr>
+        <th>a</th>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td class ="afbud" style="background-color:red !important" >afbud</td>
+        <td style="background-color: green;">tilbud</td>
+        <td style="background-color: green;">tilbud</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+        <th>1</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  {%endblock %}
+
+  {% block script %}
+  <script>
+    $("#oversigt").addClass("active");
+  </script>
+  {% endblock %}

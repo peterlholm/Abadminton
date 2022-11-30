@@ -2,7 +2,8 @@ from datetime import date, timedelta
 from django.http import HttpResponse
 from django.shortcuts import render
 #from django.conf import settings
-from fremmode.models import Medlemmer
+from fremmode.models import Medlemmer, Fremmode
+from .db_utils import get_deltager_matrix
 
 # Create your views here.
 
@@ -46,21 +47,21 @@ def oversigt(request):
     start_date = date.today()
     dates = get_next_dates(start_date, weekday, 4)
     datestring = dates_to_text(dates)
-    print(datestring)
     date_list = ['Dato']
     for this_d in datestring:
         date_list.append(this_d)
-    print(date_list)
     medlemmer = Medlemmer.objects.filter(Status=1)
+
     if True:
         deltagere = medlemmer.filter(Lordag=1).order_by('Fornavn')
     liste = []
     for d in deltagere:
-        liste.append( (d.Fornavn + ' ' + d.Efternavn, 0, 1,-1,'blue' ) )
-    datoer = ["Lør 26/11","Lør 26/11","Lør 26/11","Lør 26/11"]
-    # liste = [('peter', 0, 1,'red','blue'),('peter', 'ja', 'nej','red','blue'),('peter', 'ja', 'nej','red','blue')
-    #          ]
-    context = {'datoer': datoer, 'dates': dates, 'liste':liste}
+        liste.append( (d.Fornavn + ' ' + d.Efternavn, 0, 1,-1,-2,-3,-4) )
+    medlems_list = list(deltagere.values_list('Medlemsnummer', flat=True))
+
+    matrix = get_deltager_matrix(medlems_list, dates)
+    statuspic = ['stat1',"stat2"]
+    context = {'dates': dates, 'liste':liste, 'statuspic':statuspic}
     return render(request, 'oversigt.html', context=context)
 
 # pylint: disable=unused-argument

@@ -81,10 +81,21 @@ DATABASES = {
 
     },
 
-    'default': {
+    'default1': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'mysqlite3.db',
-    }
+    },
+    'default': {
+        'NAME': 'badminton',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'badminton',
+        'PASSWORD': 'albertslund',
+        'HOST': 'futte.holmnet.dk',
+        'PORT': '3306',
+        'OPTIONS': {
+            'autocommit': True,
+            },
+        },
 }
 
 
