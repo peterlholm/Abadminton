@@ -2,20 +2,10 @@
 {% load static %}
 
 {% block page %}
-<style>
 
-{% comment %} .table-striped>tbody>tr:nth-child(odd)>td{ {% endcomment %}
-.afbud {
-  background-color: red !important;
-  }
-  .kommera {
-    background-color: green !important;
-  }
-</style>
-<h1>Oversigt</h1>
-{{ statuspic}} {{statuspic.1}}
+<h2>Oversigt over deltagere {{day}}</h2
 <div class="table-responsive">
-  <table class="table table-bordered table-light table-striped">
+  <table class="table table-bordered table-light table-striped table-sm">
     <thead>
       <tr class="table-primary">
         <th>Dato</th>
@@ -25,14 +15,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for l in liste %}
+      {% for d in deltagere %}
       <tr>
-        <th>{{ l.0 }}</th>
-        {% for e in l %}
-          {% if forloop.counter != 1%}
+        {% for e in d %}
+        {% if forloop.counter0 == 0 %}
+        <th>{{e}}</th>
+        {% else %}
             <td>
               {% if e > 0 %}
-                <img src="{% static 'pic/green_tick.png' %}" alt="kommer" width="20" height="20"/>
+                <img src="{% static 'pic/green_tick.png' %}" alt="kommer" width="35" height="35"/>
+              {% elif e == 0 %}
+                
               {% elif e == -1 %}
                 <img src="{% static 'pic/status_1.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
               {% elif e == -2 %}
@@ -40,7 +33,7 @@
               {% elif e == -3 %}
                 <img src="{% static 'pic/status_3.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
               {% else %}
-              -1
+              value error {{e}}
               {% endif %}
             </td>
           {% endif %}
@@ -50,11 +43,9 @@
     </tbody>
     <tfoot>
       <tr>
-        <th>1</th>
-        <th>1</th>
-        <th>1</th>
-        <th>1</th>
-        <th>1</th>
+        {% for e in total %}
+          <th>{{e}}</th>
+        {% endfor %}
       </tr>
     </tfoot>
   </table>
@@ -63,6 +54,6 @@
 
   {% block script %}
   <script>
-    $("#oversigt").addClass("active");
+    $("#{{weekday}}").addClass("active");
   </script>
   {% endblock %}

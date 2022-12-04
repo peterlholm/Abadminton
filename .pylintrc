@@ -1,7 +1,7 @@
 [MASTER]
-load-plugins=pylint_django
+#load-plugins=pylint_django
 
-django-settings-module=badminton.settings
+#django-settings-module=badminton.settings
 
 [MESSAGES CONTROL]
 

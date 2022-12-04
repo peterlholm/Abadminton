@@ -43,25 +43,38 @@ def medlem(request):
 
 def oversigt(request):
     "oversigt"
-    weekday = 5 # lordag
+    weekdays=['Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag','Søndag']
+    dag = request.GET.get('dag',5)
+    weekday = int(dag)
+    print(str)
+    #weekday = 5 # lordag
     start_date = date.today()
-    dates = get_next_dates(start_date, weekday, 4)
+    dates = get_next_dates(start_date, weekday, 6)
     datestring = dates_to_text(dates)
     date_list = ['Dato']
     for this_d in datestring:
         date_list.append(this_d)
     medlemmer = Medlemmer.objects.filter(Status=1)
-
     if True:
         deltagere = medlemmer.filter(Lordag=1).order_by('Fornavn')
-    liste = []
-    for d in deltagere:
-        liste.append( (d.Fornavn + ' ' + d.Efternavn, 0, 1,-1,-2,-3,-4) )
     medlems_list = list(deltagere.values_list('Medlemsnummer', flat=True))
-
     matrix = get_deltager_matrix(medlems_list, dates)
-    statuspic = ['stat1',"stat2"]
-    context = {'dates': dates, 'liste':liste, 'statuspic':statuspic}
+    deltager_list = []
+    i = 0
+    for d in deltagere:
+        name = d.Fornavn + ' ' + d.Efternavn
+        entry = [name] + list(matrix[i])
+        deltager_list.append(entry)
+        i +=1
+    total_list = ['Ialt']
+    for d in range(len(dates)):
+        t = 0
+        for s in range(len(deltagere)):
+            if matrix[s][d] == 1:
+                t +=1
+        total_list.append(t)
+
+    context = {'weekday': weekday, 'day': weekdays[weekday], 'dates': dates, 'deltagere': deltager_list, 'matrix': matrix, 'total': total_list}
     return render(request, 'oversigt.html', context=context)
 
 # pylint: disable=unused-argument
