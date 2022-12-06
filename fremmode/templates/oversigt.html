@@ -5,12 +5,12 @@
 
 <h2>Oversigt over deltagere {{day}}</h2
 <div class="table-responsive">
-  <table class="table table-bordered table-light table-striped table-sm">
+  <table class="table table-bordered table-light table-striped xtable-sm align-middle ">
     <thead>
       <tr class="table-primary">
         <th>Dato</th>
         {% for d in dates %}
-        <th class="center">{{d| date:"l j/n"}}</th>
+        <th class="{% if forloop.counter0 > 1 %}d-none d-sm-table-cell{% endif %}" style="text-align: center;">{{d| date:"l j/n"}}</th>
         {% endfor %}
       </tr>
     </thead>
@@ -21,16 +21,27 @@
         {% if forloop.counter0 == 0 %}
         <th>{{e}}</th>
         {% else %}
-            <td>
+          {% comment %} 
+            // Status
+            // 0:	ikke udfyldt
+            // 1:	kommer
+            // 2:	kommer + ol
+            // -1:	Afbud
+            // -2:	Skadet
+            // -3:	Ferie
+            // -4:	Lukket 
+          {% endcomment %}
+
+            <td style="text-align: center;" class="{% if forloop.counter0 > 2 %}d-none d-sm-table-cell{% endif %}">
               {% if e > 0 %}
                 <img src="{% static 'pic/green_tick.png' %}" alt="kommer" width="35" height="35"/>
               {% elif e == 0 %}
                 
-              {% elif e == -1 %}
+              {% elif e == -1 %} <!--afbud-->
                 <img src="{% static 'pic/status_1.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
-              {% elif e == -2 %}
+              {% elif e == -2 %} <!--skadet-->
                 <img src="{% static 'pic/status_2.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
-              {% elif e == -3 %}
+              {% elif e == -3 %} <!-- ferie -->
                 <img src="{% static 'pic/status_3.png' %}" alt="Kommer ikke {{e}}" width="35" height="35"/>
               {% else %}
               value error {{e}}
@@ -44,7 +55,7 @@
     <tfoot>
       <tr>
         {% for e in total %}
-          <th>{{e}}</th>
+          <th {% if forloop.counter0 > 0 %} style="text-align: center;" {% endif %} class="{% if forloop.counter0 > 2 %}d-none d-sm-table-cell{% endif %}"">{{e}}</th>
         {% endfor %}
       </tr>
     </tfoot>
